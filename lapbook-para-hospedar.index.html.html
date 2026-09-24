@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lapbook · Lugares para conhecer</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#faf3e6;--card:#fff;--ink:#3a2a1e;--mut:#7a6552;--acc:#a0522d;--line:#e2d3bb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#26211c;--card:#332c25;--ink:#f1e6d6;--mut:#b9a68f;--acc:#e0a070;--line:#4b4137}}
+:root[data-theme="dark"]{--bg:#26211c;--card:#332c25;--ink:#f1e6d6;--mut:#b9a68f;--acc:#e0a070;--line:#4b4137}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,'Times New Roman',serif}
+main{max-width:860px;margin:0 auto;padding:20px 16px 40px}
+h1{color:var(--acc);margin:0 0 4px;font-size:2rem}
+h2{color:var(--acc);border-bottom:2px dashed var(--line);padding-bottom:4px;margin-top:32px}
+.box{background:var(--card);border:2px dashed var(--acc);border-radius:14px;padding:16px}
+.cover{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.cover>div:first-child{flex:1 1 240px}
+.qr{background:#fff;padding:8px;border-radius:10px;text-align:center;color:#333;font-size:.8rem;width:170px}
+.qr svg{width:100%;height:auto;display:block}
+.eyebrow{margin:0 0 8px;letter-spacing:.12em;font-size:.72rem;color:var(--mut);font-family:Arial,sans-serif}
+.mapwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+svg.map{width:100%;min-width:480px;height:auto;display:block}
+svg.map text{font-family:Arial,sans-serif}
+.note{color:var(--mut);font-style:italic;font-size:.9rem}
+.legend{list-style:none;margin:8px 0 0;padding:0}
+.legend li{padding:8px 0;border-bottom:1px solid var(--line)}
+.legend li:last-child{border:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+details{background:var(--card);border:2px solid var(--acc);border-radius:12px;padding:12px}
+summary{cursor:pointer;font-weight:bold;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary span{display:inline-block;background:var(--acc);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;margin-right:8px;font-size:.9rem}
+details[open]{border-style:dashed}
+details p{margin:10px 0 6px;font-size:.95rem}
+.photo{aspect-ratio:4/3;border:2px dashed var(--line);border-radius:8px;margin-top:10px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--mut);font-size:.85rem;padding:6px;overflow:hidden;cursor:pointer}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.write{border-bottom:1px solid var(--line);height:22px}
+button{font:inherit;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+ol.steps{padding-left:20px;color:var(--mut);font-size:.95rem}
+.cfg{margin-top:10px;font-size:.85rem;color:var(--mut)}.cfg input{width:100%;margin-top:4px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+@media print{.cfg,button{display:none}details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<section class="box cover">
+  <div>
+    <p class="eyebrow" style="margin:0">LAPBOOK · ROTEIRO DE 9 LUGARES</p>
+    <h1>Lugares para conhecer</h1>
+    <p>Abra cada cartão, descubra o lugar, cole uma foto e escreva o que aprendeu. Aponte a câmera do celular para o QR code para abrir este lapbook.</p>
+    <button onclick="window.print()">Imprimir lapbook</button>
+    <label class="cfg">Endereço do QR code (cole o link de onde o lapbook estiver hospedado)<input id="qurl" type="url" placeholder="https://..."></label>
+  </div>
+  <div class="qr"><div id="qr">QR code</div><div style="margin-top:4px">Escaneie para abrir</div></div>
+</section>
+
+<h2>Mapa dos lugares</h2>
+<div class="box">
+  <p class="eyebrow">MAPA ESQUEMÁTICO</p>
+  <div class="mapwrap">
+  <svg class="map" viewBox="0 0 345 165" role="img" aria-label="Mapa esquemático com os 9 lugares numerados">
+    <path d="M6 92 C 60 84, 110 68, 175 100 S 290 122, 340 72" fill="none" stroke="var(--acc)" stroke-width="1.6" opacity=".7"/>
+    <g id="pins"></g>
+  </svg>
+  </div>
+  <p class="note">Mapa esquemático, sem escala: as posições são aproximadas.</p>
+  <ol class="legend" id="legend"></ol>
+</div>
+
+<h2>Cartões dos lugares</h2>
+<div class="grid" id="cards"></div>
+
+<h2>Como montar</h2>
+<ol class="steps">
+  <li>Imprima esta página e recorte cada cartão pelas bordas.</li>
+  <li>Dobre uma cartolina ao meio, depois as duas pontas ao centro (formato de portas).</li>
+  <li>Cole o mapa no centro e os cartões em ordem, de 1 a 9, com a foto de cada lugar.</li>
+  <li>Cole o QR code na capa do lapbook.</li>
+</ol>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+var LAPBOOK_URL="";
+// nome completo, rótulo no mapa, x, y, descrição
+var places=[
+["Parque Aldeia do Imigrante","Aldeia",73,67,"Conheça este parque e a história de quem chegou e construiu a região."],
+["Museu Histórico Municipal","Museu",128,48,"Objetos e fotos que contam como a cidade foi crescendo."],
+["Memorial Padre Theodor Amstad","Amstad",184,79,"Um espaço em homenagem ao padre Theodor Amstad."],
+["Arquivo Histórico Municipal Lino Grings","Arquivo",144,107,"Onde ficam guardados documentos e registros da história local."],
+["Biblioteca Pública Municipal Professora Elsa Hofstätter da Silva","Biblioteca",92,116,"Um lugar para ler, estudar e pesquisar."],
+["Esculturas do Parque Pedras do Silêncio","Pedras",295,36,"Esculturas ao ar livre para observar com calma."],
+["Moinho Rasche","Rasche",42,36,"Um moinho que lembra o trabalho de outros tempos."],
+["Moinho e Serraria Hillebrand","Hillebrand",246,128,"Moinho e serraria que ajudam a contar a história do trabalho."],
+["Casas enxaimel da Rua Coronel Alfredo Steglich","Enxaimel",184,144,"Casas em enxaimel, técnica de construção com estrutura de madeira aparente."]
+];
+var ns="http://www.w3.org/2000/svg",pins=document.getElementById("pins"),cards=document.getElementById("cards"),legend=document.getElementById("legend");
+places.forEach(function(p,i){
+  var n=i+1,g=document.createElementNS(ns,"g");
+  g.innerHTML='<circle cx="'+p[2]+'" cy="'+p[3]+'" r="7" fill="var(--acc)"/><text x="'+p[2]+'" y="'+(p[3]+3)+'" font-size="8" text-anchor="middle" fill="#fff">'+n+'</text><text x="'+p[2]+'" y="'+(p[3]+17)+'" font-size="7" text-anchor="middle" fill="var(--ink)">'+p[1]+'</text>';
+  pins.appendChild(g);
+  var li=document.createElement("li");li.textContent=n+" · "+p[0];legend.appendChild(li);
+  var d=document.createElement("details");
+  d.innerHTML='<summary><span>'+n+'</span>'+p[0]+'</summary><p>'+p[4]+'</p><label class="photo">Toque para colocar a foto<input type="file" accept="image/*" hidden></label><p class="note">O que descobri:</p><div class="write"></div><div class="write"></div>';
+  d.querySelector("input").addEventListener("change",function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();r.onload=function(){var l=d.querySelector(".photo");l.innerHTML='<img alt="Foto: '+p[0].replace(/"/g,"")+'">';l.firstChild.src=r.result;};
+    r.readAsDataURL(f);
+  });
+  cards.appendChild(d);
+});
+function draw(u){
+  var el=document.getElementById("qr");
+  if(!u){el.textContent="Cole o endereço abaixo";return;}
+  try{var q=qrcode(0,"M");q.addData(u);q.make();el.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});}
+  catch(e){el.textContent="QR indisponível";}
+}
+var inp=document.getElementById("qurl"),saved="";
+try{saved=localStorage.getItem("qurl")||"";}catch(e){}
+inp.value=saved||LAPBOOK_URL;draw(inp.value.trim());
+inp.addEventListener("input",function(){var v=inp.value.trim();draw(v);try{localStorage.setItem("qurl",v);}catch(e){}});
+</script>
+</body>
+</html>
